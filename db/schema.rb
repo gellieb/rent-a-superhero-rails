@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150406160207) do
   end
 
   create_table "superheros", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",                                           null: false
     t.string   "specialty",      default: "general awesomeness"
     t.integer  "overall_rating"
     t.text     "bio",                                            null: false
