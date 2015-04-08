@@ -10,6 +10,7 @@ class SuperherosController < ApplicationController
   # GET /superheros/1
   # GET /superheros/1.json
   def show
+    @superhero = Superhero.find_by(id: params[:id])
   end
 
   # GET /superheros/new
@@ -19,6 +20,7 @@ class SuperherosController < ApplicationController
 
   # GET /superheros/1/edit
   def edit
+    @superhero = Superhero.find_by(id: params[:id])
   end
 
   # POST /superheros
