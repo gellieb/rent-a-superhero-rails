@@ -25,40 +25,18 @@ class SuperherosController < ApplicationController
   # POST /superheros.json
   def create
     @superhero = Superhero.new(superhero_params)
-
-    respond_to do |format|
-      if @superhero.save
-        format.html { redirect_to @superhero, notice: 'Superhero was successfully created.' }
-        format.json { render :show, status: :created, location: @superhero }
-      else
-        format.html { render :new }
-        format.json { render json: @superhero.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to superhero_path(@superhero)
   end
 
-  # PATCH/PUT /superheros/1
-  # PATCH/PUT /superheros/1.json
   def update
-    respond_to do |format|
-      if @superhero.update(superhero_params)
-        format.html { redirect_to @superhero, notice: 'Superhero was successfully updated.' }
-        format.json { render :show, status: :ok, location: @superhero }
-      else
-        format.html { render :edit }
-        format.json { render json: @superhero.errors, status: :unprocessable_entity }
-      end
-    end
+    @superhero = Superhero.find_by(id: params[:id])
+    @superhero.update_attributes(superhero_params)
+    redirect_to superhero_path(superhero_params)
   end
 
   # DELETE /superheros/1
   # DELETE /superheros/1.json
   def destroy
-    @superhero.destroy
-    respond_to do |format|
-      format.html { redirect_to superheros_url, notice: 'Superhero was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
@@ -69,6 +47,6 @@ class SuperherosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def superhero_params
-      params[:superhero]
+      params.require(:superhero).permit(:name, :specialty, :bio, :overall_rating)
     end
 end
