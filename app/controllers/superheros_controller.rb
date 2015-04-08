@@ -26,6 +26,7 @@ class SuperherosController < ApplicationController
   # POST /superheros
   # POST /superheros.json
   def create
+
     @superhero = Superhero.create(superhero_params)
     redirect_to superhero_path(@superhero)
   end
@@ -33,6 +34,7 @@ class SuperherosController < ApplicationController
   # PATCH/PUT /superheros/1
   # PATCH/PUT /superheros/1.json
   def update
+
     @superhero = Superhero.find_by(id: params[:id])
     @superhero.update_attributes(superhero_params)
     redirect_to superhero_path(superhero_params)
